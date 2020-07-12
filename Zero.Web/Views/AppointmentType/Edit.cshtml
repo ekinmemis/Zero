@@ -1,0 +1,50 @@
+﻿@model AppointmentTypeModel
+
+@{ ViewBag.Title = "Edit";}
+
+@using (Html.BeginForm())
+{
+    <div class="card">
+        <div class="card-header bg-white header-elements-sm-inline">
+            <h6 class="card-title"> Randevu Tipi Düzenle </h6>
+            <div class="header-elements">
+                <button type="submit" name="save" value="save" class="btn bg-blue"><i class="icon-floppy-disk mr-1"></i> Kaydet </button>
+                <button type="button" id="swal-delete" data-redirect-url="/AppointmentType/List" data-delete-action="/AppointmentType/Delete/@Model.Id" class="btn bg-danger-400 ml-1"><i class="icon-cross mr-1"></i>Sil</button>
+            </div>
+        </div>
+
+        <div class="card-body">
+
+            @Html.AntiForgeryToken()
+
+            @Html.HiddenFor(model => model.Id)
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="form-group row">
+                @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "col-md-2 col-form-label" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            
+            <div class="form-group row">
+                @Html.LabelFor(model => model.AppointmentPeriodeTypeId, htmlAttributes: new { @class = "col-md-2 col-form-label" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.AppointmentPeriodeTypeId, Model.AvailableAppointmentPeriodeTypes, null, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.AppointmentPeriodeTypeId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group row">
+                @Html.LabelFor(model => model.DefaultSeanceQuantity, htmlAttributes: new { @class = "col-md-2 col-form-label" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.DefaultSeanceQuantity, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.DefaultSeanceQuantity, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+}
+

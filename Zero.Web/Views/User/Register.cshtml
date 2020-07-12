@@ -1,0 +1,265 @@
+﻿@using Zero.Web.Models.User
+@model RegisterModel
+@{
+    /**/
+
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Register</title>
+
+    <!-- Global stylesheets -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" rel="stylesheet" type="text/css">
+    <link href="~/Content/AdminTheme/global_assets/css/icons/icomoon/styles.min.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/AdminTheme/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/AdminTheme/assets/css/bootstrap_limitless.min.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/AdminTheme/assets/css/layout.min.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/AdminTheme/assets/css/components.min.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/AdminTheme/assets/css/colors.min.css" rel="stylesheet" type="text/css">
+    <!-- /global stylesheets -->
+    <!-- Core JS files -->
+    <script src="~/Content/AdminTheme/global_assets/js/main/jquery.min.js"></script>
+    <script src="~/Content/AdminTheme/global_assets/js/main/bootstrap.bundle.min.js"></script>
+    <script src="~/Content/AdminTheme/global_assets/js/plugins/loaders/blockui.min.js"></script>
+    <!-- /core JS files -->
+    <!--DataTable-->
+    <link href="//cdn.datatables.net/1.10.9/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <script src="//cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js"></script>
+    <!--/DataTable-->
+    <!-- Theme JS files -->
+    <script src="~/Content/AdminTheme/global_assets/js/plugins/visualization/d3/d3.min.js"></script>
+    <script src="~/Content/AdminTheme/global_assets/js/plugins/visualization/d3/d3_tooltip.js"></script>
+    <script src="~/Content/AdminTheme/global_assets/js/plugins/notifications/sweet_alert.min.js"></script>
+    <script src="~/Content/AdminTheme/global_assets/js/plugins/forms/styling/switchery.min.js"></script>
+    <script src="~/Content/AdminTheme/global_assets/js/plugins/forms/selects/bootstrap_multiselect.js"></script>
+    <script src="~/Content/AdminTheme/global_assets/js/plugins/ui/moment/moment.min.js"></script>
+    <script src="~/Content/AdminTheme/global_assets/js/plugins/pickers/daterangepicker.js"></script>
+    <script src="~/Content/AdminTheme/global_assets/js/plugins/pickers/anytime.min.js"></script>
+    <script src="~/Content/AdminTheme/global_assets/js/plugins/pickers/pickadate/picker.js"></script>
+    <script src="~/Content/AdminTheme/global_assets/js/plugins/pickers/pickadate/picker.date.js"></script>
+    <script src="~/Content/AdminTheme/global_assets/js/plugins/pickers/pickadate/picker.time.js"></script>
+    <script src="~/Content/AdminTheme/global_assets/js/plugins/pickers/pickadate/legacy.js"></script>
+    <script src="~/Content/AdminTheme/global_assets/js/plugins/tables/datatables/datatables.min.js"></script>
+    <script src="~/Content/AdminTheme/global_assets/js/plugins/forms/selects/select2.min.js"></script>
+    <script src="~/Content/AdminTheme/assets/js/app.js"></script>
+    <script src="~/Content/AdminTheme/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Content/AdminTheme/Scripts/jquery.validate.unobtrusive.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Content/AdminTheme/PageScripts/decimal.validator.js"></script>
+    <script src="~/Content/AdminTheme/PageScripts/datepicker.js"></script>
+    <script src="~/Content/AdminTheme/PageScripts/sweetalert_extra.js"></script>
+</head>
+
+<body>
+    <!-- Main navbar -->
+    <div class="navbar navbar-expand-md navbar-dark">
+        <div class="navbar-brand">
+            <a href="/" class="d-inline-block">
+                <img src="/Content/AdminTheme/global_assets/images/logo_light.png" alt="">
+            </a>
+        </div>
+
+        <div class="d-md-none">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-mobile">
+                <i class="icon-tree5"></i>
+            </button>
+        </div>
+    </div>
+    <!-- /main navbar -->
+    <!-- Page content -->
+    <div class="page-content">
+        <!-- Main content -->
+        <div class="content-wrapper">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <!-- Content area -->
+            <div class="content d-flex justify-content-center align-items-center">
+                <!-- Registration form -->
+                @using (Html.BeginForm("Register", "User", FormMethod.Post, new { @class = "flex-fill" }))
+                {
+                    <div class="row">
+                        <div class="col-lg-6 offset-lg-3">
+                            <div class="card mb-0">
+                                <div class="card-body">
+                                    <div class="text-center mb-3">
+                                        <i class="icon-plus3 icon-2x text-success border-success border-3 rounded-round p-3 mb-3 mt-1"></i>
+                                        <h5 class="mb-0">Kayıt Ol</h5>
+                                        @Html.AntiForgeryToken()
+                                    </div>
+
+                                    <div class="form-group row">
+                                        @Html.LabelFor(model => model.TurkishIdentityNumber, htmlAttributes: new { @class = "col-md-2 col-form-label" })
+                                        <div class="col-md-10">
+                                            @Html.EditorFor(model => model.TurkishIdentityNumber, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.TurkishIdentityNumber, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        @Html.LabelFor(model => model.PhoneNumber, htmlAttributes: new { @class = "col-md-2 col-form-label" })
+                                        <div class="col-md-10">
+                                            @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "col-md-2 col-form-label" })
+                                        <div class="col-md-10">
+                                            @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "col-md-2 col-form-label" })
+                                        <div class="col-md-10">
+                                            @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "col-md-2 col-form-label" })
+                                        <div class="col-md-10">
+                                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        @Html.LabelFor(model => model.ConfirmEmail, htmlAttributes: new { @class = "col-md-2 col-form-label" })
+                                        <div class="col-md-10">
+                                            @Html.EditorFor(model => model.ConfirmEmail, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.ConfirmEmail, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "col-md-2 col-form-label" })
+                                        <div class="col-md-10">
+                                            @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        @Html.LabelFor(model => model.ConfirmPassword, htmlAttributes: new { @class = "col-md-2 col-form-label" })
+                                        <div class="col-md-10">
+                                            @Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <div class="input-group date" data-provide="datepicker">
+                                            @Html.LabelFor(model => model.DateOfBirth, htmlAttributes: new { @class = "col-md-2 col-form-label" })
+                                            <div class="col-md-10">
+                                                @Html.EditorFor(model => model.DateOfBirth, new { htmlAttributes = new { @class = "form-control datepicker", tpye = "text" } })
+                                                @Html.ValidationMessageFor(model => model.DateOfBirth, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        @Html.LabelFor(model => model.PalceOfBirth, htmlAttributes: new { @class = "col-md-2 col-form-label" })
+                                        <div class="col-md-10">
+                                            @Html.EditorFor(model => model.PalceOfBirth, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.PalceOfBirth, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="btn bg-teal-400 btn-labeled btn-labeled-right"><b><i class="icon-plus3"></i></b> Kayıt Ol</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+                <!-- /registration form -->
+            </div>
+            <!-- /content area -->
+        </div>
+        <!-- /main content -->
+    </div>
+    <!-- /page content -->
+
+    <script type=text/javascript>
+                function getDateFormat(formatString) {
+                    var separator = formatString.match(/[.\/\-\s].*?/);
+                    var parts = formatString.split(/\W+/);
+                    if (!separator || !parts || parts.length === 0) {
+                        throw new Error("Invalid date format.");
+                    }
+                    return { separator: separator, parts: parts };
+                }
+
+                function MyParseDate(value, format) {
+                    var parts = value.split(format.separator);
+
+                    //NEVER use Date(0), this is locale specific!
+                    // * en-GB: 1970-JAN-01
+                    // * pt-BR: 1969-DEC-31
+                    //var date = new Date(0);
+
+                    //An arbitrary date 1970-DEC-15
+                    var date = new Date(1970, 11, 15);
+
+                    var year = -1;
+                    var month = -1;
+                    var day = -1;
+
+                    if (parts.length === format.parts.length) {
+                        for (var i = 0, cnt = format.parts.length; i < cnt; i++) {
+                            var val = parseInt(parts[i], 10) || 1;
+
+                            switch (format.parts[i]) {
+                                case 'dd':
+                                case 'd':
+                                    day = val;
+                                    break;
+                                case 'mm':
+                                case 'm':
+                                    month = val - 1; // month is zero-based
+                                    break;
+                                case 'yyyy':
+                                    year = val;
+                                    break;
+                            }
+                        }
+                    }
+
+                    // must be in this particular order, otherwise 29th of Feb in leap year would not validate
+                    date.setFullYear(year);
+                    date.setMonth(month);
+                    date.setDate(day);
+
+                    console.log("Date validated to " + date.toString());
+
+                    // we can't rely on setDay(), setMonth(), setYear() because if value passed in is greater than allowed, it just ticks over
+                    // to the next month/year. But we can compare if it was ticked over or not.
+                    // If numbers provided are the same as resulting number, then date is fine.
+                    return date.getDate() === day && date.getMonth() === month && date.getFullYear() === year;
+                }
+
+                jQuery.validator.addMethod('date',
+                    function (value, element, params) {
+                        if (this.optional(element)) {
+                            return true;
+                        }
+                        try {
+                            var format = getDateFormat('dd/mm/yyyy');
+                            var result = MyParseDate(value, format);
+                            return result;
+                        } catch (err) {
+                            console.log(err);
+                            return false;
+                        }
+                    });
+    </script>
+</body>
+</html>
+

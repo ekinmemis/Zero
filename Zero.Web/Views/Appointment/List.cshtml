@@ -1,0 +1,162 @@
+﻿@model AppointmentListModel
+
+@{ ViewBag.Title = "List";}
+
+<div class="card">
+
+    <div class="card-header bg-white header-elements-sm-inline">
+        <h6 class="card-title"> Randevu Listesi </h6>
+        <div class="header-elements">
+            <a href="/Appointment/Create" name="save" class="btn bg-blue"><i class="icon-floppy-disk mr-1"></i> Yeni Ekle </a>
+        </div>
+    </div>
+
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-12">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                <div class="form-group row">
+                    @Html.LabelFor(model => model.SearchName, htmlAttributes: new { @class = "col-form-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.SearchName, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.SearchName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="col-md-12 mt-3">
+                    <div class="col-md-2 offset-5">
+                        <button id="btnSearch" class="btn btn-primary"> <i class="icon-search4"></i> Arama </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card">
+    <table id="myTable" class="display compact">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Ad</th>
+                <th>Başlangıç Tarihi</th>
+                <th>Bitiş Tarihi</th>
+                <th>Ücret</th>
+                <th>Ücret + KDV</th>
+                <th>Durum Numarası</th>
+                <th>Tip Numarası</th>
+                <th>Düzenle</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+</div>
+
+<script>
+    $(document).ready(function () {
+        //jQuery DataTables initialization
+        $('#myTable').DataTable({
+            "processing": true,                       // for show processing bar
+            "serverSide": true,                       // for process on server side
+            "orderMulti": false,                      // for disable multi column order
+            "dom": '<"top"i>rt<"bottom"lp><"clear">', // for hide default global search box
+           "ordering": false,
+            "ajax": {
+                "url": "/Appointment/AppointmentList",
+                "type": "POST",
+                "datatype": "json"
+            },
+            "columns": [
+                {
+                    "data": "Id",
+                    "name": "Id",
+                    "autoWidth": true
+                },
+                {
+                    "data": "Name",
+                    "name": "Name",
+                    "autoWidth": true
+                },
+                {
+                    "data": "StartDate",
+                    "name": "StartDate",
+                    "autoWidth": true,
+                    "mRender": function (data, type, full)
+                    {
+                        var dtStart = new Date(parseInt(data.substr(6)));
+                        var dtStartWrapper = moment(dtStart);
+                        return dtStartWrapper.format('DD/MM/YYYY');
+                    }
+                },
+                {
+                    "data": "EndDate",
+                    "name": "EndDate",
+                    "autoWidth": true,
+                    "mRender": function (data, type, full)
+                    {
+                        var dtStart = new Date(parseInt(data.substr(6)));
+                        var dtStartWrapper = moment(dtStart);
+                        return dtStartWrapper.format('DD/MM/YYYY');
+                    }
+                },
+                {
+                    "data": "Price",
+                    "name": "Price",
+                    "autoWidth": true
+                },
+                {
+                    "data": "PriceIncludedTax",
+                    "name": "PriceIncludedTax",
+                    "autoWidth": true
+                },
+                {
+                    "data": "AppointmentStatusId",
+                    "name": "AppointmentStatusId",
+                    "autoWidth": true
+                },
+                {
+                    "data": "AppointmentTypeId",
+                    "name": "AppointmentTypeId",
+                    "autoWidth": true
+                },
+                {
+                    "render": function (data, type, full, meta)
+                    {
+                        return '<a class="Edit" href="/Appointment/Edit/' + full.Id + '">Düzenle</a>';
+                    }
+                },
+            ],
+            "language": {
+                        "sInfo": '',//remove => There are a total of _TOTAL_ <span class="lvllbl"></span>.
+                        "sInfoEmpty": '',//remove => There are a total of _TOTAL_ <span class="lvllbl"></span>.
+                        "sEmptyTable": '',//remove => There are no <span class="lvllbl"></span> to display
+                        "sZeroRecords": '',//remove => There are no matching <span class="lvllbl"></span> to display
+                        "sProcessing": 'Yükleniyor...<span class="lvllbl"></span>',
+                        "infoFiltered": "",//remove => - filtered from x total entries,
+                        "sLengthMenu":"Gösterilen Randevu Sayısı _MENU_", //change => dropdownlist
+                        "paginate": {"previous": "","next": ""}//remove => previous,next
+            },
+        });
+        $('#btnSearch').click(function () {
+            //Apply Custom search on jQuery DataTables here
+            oTable = $('#myTable').DataTable();
+
+            var searchValue = {
+                SearchName: $("#@Html.IdFor(model => model.SearchName)").val(),
+            };
+
+            var blkstr = [];
+            $.each(searchValue, function(idx2,val2) {
+              var str = idx2 + ":" + val2;
+              blkstr.push(str);
+            });
+
+            //Apply search for
+            oTable.search(blkstr);
+
+            //hit search on server
+            oTable.draw();
+        });
+    });
+</script>

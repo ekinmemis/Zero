@@ -1,0 +1,191 @@
+﻿@model  EmployeeListModel
+
+@{ ViewBag.Title = "List";}
+
+<div class="card">
+    <div class="card-header bg-white header-elements-sm-inline">
+        <h6 class="card-title"> Çalışanlar Listesi </h6>
+        <div class="header-elements">
+            <a href="/Employee/Create" name="save" class="btn bg-blue"><i class="icon-floppy-disk mr-1"></i> Yeni Ekle </a>
+        </div>
+    </div>
+
+    <div class="card-body">
+        <div class="row">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="col-md-12">
+                <div class="form-group row">
+                    @Html.LabelFor(model => model.SearchFirstName, htmlAttributes: new { @class = "col-form-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.SearchFirstName, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.SearchFirstName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    @Html.LabelFor(model => model.SearchLastName, htmlAttributes: new { @class = "col-form-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.SearchLastName, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.SearchLastName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    @Html.LabelFor(model => model.SearchTitle, htmlAttributes: new { @class = "col-form-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.SearchTitle, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.SearchTitle, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12 mt-3">
+                <div class="col-md-2 offset-5">
+                    <button id="btnSearch" class="btn btn-primary"> <i class="icon-search4"></i> Arama </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card">
+    <table id="myTable" class="display compact" style="width:100%">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>TCKN</th>
+                <th>Ad</th>
+                <th>Soyad</th>
+                <th>Telefon Numarası</th>
+                <th>E-Posta</th>
+                <th>Ünvan</th>
+                <th>Maaş</th>
+                <th>Doğum Tarihi</th>
+                <th>Doğum Yeri</th>
+                <th>Düzenle</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+</div>
+
+<script>
+    $(document).ready(function () {
+        //jQuery DataTables initialization
+        $('#myTable').DataTable({
+            "processing": true,                       // show processing bar
+            "serverSide": true,                       // process on server side
+            "orderMulti": false,                      // disable multi column order
+            "dom": '<"top"i>rt<"bottom"lp><"clear">', // hide default global search box,
+            "ordering": false,
+            "ajax": {
+                "url": "/Employee/EmployeeList",
+                "type": "POST",
+                "datatype": "json",
+            },
+            "columns": [
+                {
+                    "data": "Id",
+                    "name": "Id",
+                    "autoWidth": true
+                },
+                {
+                    "data": "TurkishIdentityNumber",
+                    "name": "TurkishIdentityNumber",
+                    "autoWidth": true
+                },
+                {
+                    "data": "FirstName",
+                    "name": "FirstName",
+                    "autoWidth": true
+                },
+                {
+                    "data": "LastName",
+                    "name": "LastName",
+                    "autoWidth": true
+                },
+                {
+                    "data": "PhoneNumber",
+                    "name": "PhoneNumber",
+                    "autoWidth": true
+                },
+                {
+                    "data": "Email",
+                    "name": "Email",
+                    "autoWidth": true
+                },
+                {
+                    "data": "Title",
+                    "name": "Title",
+                    "autoWidth": true
+                },
+                {
+                    "data": "Sallary",
+                    "name": "Sallary",
+                    "autoWidth": true
+                },
+                {
+                    "data": "DateOfBirth",
+                    "name": "DateOfBirth",
+                    "autoWidth": true,
+                    "mRender": function (data, type, full)
+                    {
+                        var dtStart = new Date(parseInt(data.substr(6)));
+                        var dtStartWrapper = moment(dtStart);
+                        return dtStartWrapper.format('DD/MM/YYYY');
+                    }
+                },
+                {
+                    "data": "PalceOfBirth",
+                    "name": "PalceOfBirth",
+                    "autoWidth": true
+                },
+                {
+                    "render": function (data, type, full, meta)
+                    {
+                        return '<a class="Edit" href="/Employee/Edit/' + full.Id + '">Düzenle</a>';
+                    }
+                },
+
+            ],
+            "language": {
+                        "sInfo": '',//remove => There are a total of _TOTAL_ <span class="lvllbl"></span>.
+                        "sInfoEmpty": '',//remove => There are a total of _TOTAL_ <span class="lvllbl"></span>.
+                        "sEmptyTable": '',//remove => There are no <span class="lvllbl"></span> to display
+                        "sZeroRecords": '',//remove => There are no matching <span class="lvllbl"></span> to display
+                        "sProcessing": 'Yükleniyor...<span class="lvllbl"></span>',
+                        "infoFiltered": "",//remove => - filtered from x total entries,
+                        "sLengthMenu":"Gösterilen Kişi Sayısı _MENU_", //change => dropdownlist
+                        "paginate": {"previous": "Önceki","next": "Sonraki"},//change => previous,next
+                        "paginate": {"previous": "","next": ""}//remove => previous,next
+            },
+        });
+
+        $('#btnSearch').click(function () {
+
+            //Apply Custom search on jQuery DataTables here
+
+            Table = $('#myTable').DataTable();
+
+            var searchValue = {
+                SearchFirstName: $("#@Html.IdFor(model => model.SearchFirstName)").val(),
+                SearchLastName: $("#@Html.IdFor(model => model.SearchLastName)").val(),
+                SearchTitle: $("#@Html.IdFor(model => model.SearchTitle)").val(),
+            };
+
+            var blkstr = [];
+
+            $.each(searchValue, function(idx2,val2) {
+              var str = idx2 + ":" + val2;
+              blkstr.push(str);
+            });
+
+            //Apply search for
+            Table.search(blkstr);
+
+            //hit search on server
+            Table.draw();
+        });
+    });
+</script>

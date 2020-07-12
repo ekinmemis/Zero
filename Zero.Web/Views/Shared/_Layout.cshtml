@@ -1,0 +1,305 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Ana Sayfa</title>
+    <!-- Global stylesheets -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" rel="stylesheet" type="text/css">
+    <link href="~/Content/AdminTheme/global_assets/css/icons/icomoon/styles.min.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/AdminTheme/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/AdminTheme/assets/css/bootstrap_limitless.min.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/AdminTheme/assets/css/layout.min.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/AdminTheme/assets/css/components.min.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/AdminTheme/assets/css/colors.min.css" rel="stylesheet" type="text/css">
+    <!-- /global stylesheets -->
+    <!-- Core JS files -->
+    <script src="~/Content/AdminTheme/global_assets/js/main/jquery.min.js"></script>
+    <script src="~/Content/AdminTheme/global_assets/js/main/bootstrap.bundle.min.js"></script>
+    <script src="~/Content/AdminTheme/global_assets/js/plugins/loaders/blockui.min.js"></script>
+    <!-- /core JS files -->
+    <!--DataTable-->
+    <link href="//cdn.datatables.net/1.10.9/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <script src="//cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js"></script>
+    <!--/DataTable-->
+    <!-- Theme JS files -->
+    <script src="~/Content/AdminTheme/global_assets/js/plugins/visualization/d3/d3.min.js"></script>
+    <script src="~/Content/AdminTheme/global_assets/js/plugins/visualization/d3/d3_tooltip.js"></script>
+    <script src="~/Content/AdminTheme/global_assets/js/plugins/notifications/sweet_alert.min.js"></script>
+    <script src="~/Content/AdminTheme/global_assets/js/plugins/forms/styling/switchery.min.js"></script>
+    <script src="~/Content/AdminTheme/global_assets/js/plugins/forms/selects/bootstrap_multiselect.js"></script>
+    <script src="~/Content/AdminTheme/global_assets/js/plugins/ui/moment/moment.min.js"></script>
+    <script src="~/Content/AdminTheme/global_assets/js/plugins/pickers/daterangepicker.js"></script>
+    <script src="~/Content/AdminTheme/global_assets/js/plugins/pickers/anytime.min.js"></script>
+    <script src="~/Content/AdminTheme/global_assets/js/plugins/pickers/pickadate/picker.js"></script>
+    <script src="~/Content/AdminTheme/global_assets/js/plugins/pickers/pickadate/picker.date.js"></script>
+    <script src="~/Content/AdminTheme/global_assets/js/plugins/pickers/pickadate/picker.time.js"></script>
+    <script src="~/Content/AdminTheme/global_assets/js/plugins/pickers/pickadate/legacy.js"></script>
+    <script src="~/Content/AdminTheme/global_assets/js/plugins/tables/datatables/datatables.min.js"></script>
+    <script src="~/Content/AdminTheme/global_assets/js/plugins/forms/selects/select2.min.js"></script>
+    <script src="~/Content/AdminTheme/assets/js/app.js"></script>
+    <script src="~/Content/AdminTheme/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Content/AdminTheme/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Content/AdminTheme/PageScripts/datepicker.js"></script>
+    <script src="~/Content/AdminTheme/PageScripts/sweetalert_extra.js"></script>
+    @RenderSection("PageJs", false)
+    <!-- /theme JS files -->
+</head>
+<body class="sidebar-xs">
+    <!-- Main navbar -->
+    <div class="navbar navbar-expand-md navbar-light">
+        <!-- Header with logos -->
+        <div class="navbar-header navbar-dark d-none d-md-flex align-items-md-center">
+            <div class="navbar-brand navbar-brand-md">
+                <a href="/Home/Index" class="d-inline-block">
+                    <img src="/Content/AdminTheme/global_assets/images/logo_light.png" alt="">
+                </a>
+            </div>
+            <div class="navbar-brand navbar-brand-xs">
+                <a href="/Home/Index" class="d-inline-block">
+                    <img src="/Content/AdminTheme/global_assets/images/logo_icon_light.png" alt="">
+                </a>
+            </div>
+        </div>
+        <!-- /header with logos -->
+        <!-- Mobile controls -->
+        <div class="d-flex flex-1 d-md-none">
+            <div class="navbar-brand mr-auto">
+                <a href="#" class="d-inline-block">
+                    <img src="/Content/AdminTheme/global_assets/images/logo_dark.png" alt="">
+                </a>
+            </div>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-mobile">
+                <i class="icon-tree5"></i>
+            </button>
+
+            <button class="navbar-toggler sidebar-mobile-main-toggle" type="button">
+                <i class="icon-paragraph-justify3"></i>
+            </button>
+        </div>
+        <!-- /mobile controls -->
+        <!-- Navbar content -->
+        @*<div class="collapse navbar-collapse" id="navbar-mobile">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a href="#" class="navbar-nav-link sidebar-control sidebar-main-toggle d-none d-md-block">
+                            <i class="icon-paragraph-justify3"></i>
+                        </a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item dropdown dropdown-user">
+                        <a href="#" class="navbar-nav-link d-flex align-items-center dropdown-toggle" data-toggle="dropdown">
+                            <img src="/Content/AdminTheme/global_assets/images/placeholders/placeholder.jpg" class="rounded-circle mr-2" height="34" alt="">
+                            <span> Ekin Memiş </span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a href="#" class="dropdown-item"><i class="icon-user"></i> Hesabım </a>
+                            <a href="/User/Logout" class="dropdown-item"><i class="icon-switch2"></i> Çıkış Yap</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>*@
+        <!-- /navbar content -->
+    </div>
+    <!-- /main navbar -->
+    <!-- Page content -->
+    <div class="page-content">
+
+        <!-- Main sidebar -->
+        <div class="sidebar sidebar-dark sidebar-main sidebar-expand-md">
+
+            <!-- Sidebar mobile toggler -->
+            <div class="sidebar-mobile-toggler text-center">
+
+                <a href="#" class="sidebar-mobile-main-toggle">
+                    <i class="icon-arrow-left8"></i>
+                </a>
+
+                <a href="#" class="sidebar-mobile-expand">
+                    <i class="icon-screen-full"></i>
+                    <i class="icon-screen-normal"></i>
+                </a>
+
+            </div>
+            <!-- /sidebar mobile toggler -->
+            <!-- Sidebar content -->
+            <div class="sidebar-content">
+                <!-- Main navigation -->
+                <div class="card card-sidebar-mobile">
+                    <ul class="nav nav-sidebar" data-nav-type="accordion">
+                        <!-- Main -->
+                        @*<li class="nav-item"><a href="#" class="nav-link"><i class="icon-width"></i> <span> İstatistik Ekranı </span></a></li>*@
+                        @*<li class="nav-item"><a href="/Catalog/List" class="nav-link"><i class="icon-cube4"></i> <span> Ürünler / Hizmetler </span></a></li>*@
+
+                        <li class="nav-item nav-item-submenu">
+                            <a href="#" class="nav-link"><i class="icon-alarm-check"></i> <span> Randevular</span></a>
+                            <ul class="nav nav-group-sub" data-submenu-title="Randevular">
+                                <li class="nav-item"><a href="/Appointment/Create" class="nav-link"> Randevu Ekle </a></li>
+                                <li class="nav-item"><a href="/Appointment/List" class="nav-link"> Randevu Listesi </a></li>
+                                <li class="nav-item"><a href="/AppointmentType/Create" class="nav-link"> Randevu Türü Ekle </a></li>
+                                <li class="nav-item"><a href="/AppointmentType/List" class="nav-link"> Randevu Türü Listesi </a></li>
+                            </ul>
+                        </li>
+
+                        <li class="nav-item nav-item-submenu">
+                            <a href="#" class="nav-link"><i class="icon-users4"></i> <span>Müşteriler</span></a>
+                            <ul class="nav nav-group-sub" data-submenu-title="Müşteriler">
+                                <li class="nav-item"><a href="/Customer/Create" class="nav-link"> Müşteri Ekle </a></li>
+                                <li class="nav-item"><a href="/Customer/List" class="nav-link"> Müşteri Listesi </a></li>
+                            </ul>
+                        </li>
+
+                        <li class="nav-item nav-item-submenu">
+                            <a href="#" class="nav-link"><i class="icon-users2"></i> <span> Çalışanlar </span></a>
+                            <ul class="nav nav-group-sub" data-submenu-title="Çalışanlar">
+                                <li class="nav-item"><a href="/Employee/Create" class="nav-link"> Çalışan Ekle </a></li>
+                                <li class="nav-item"><a href="/Employee/List" class="nav-link"> Çalışan Listesi </a></li>
+                            </ul>
+                        </li>
+
+                        @*<li class="nav-item nav-item-submenu">
+                                <a href="#" class="nav-link"><i class="icon-people"></i> <span> Sistem Kullanıcıları </span></a>
+                                <ul class="nav nav-group-sub" data-submenu-title="Kullanıcılar">
+                                    <li class="nav-item"><a href="#" class="nav-link"> Kullanıcılar </a></li>
+                                    <li class="nav-item"><a href="#" class="nav-link"> Kullanıcı Rolleri </a></li>
+                                    <li class="nav-item"><a href="#" class="nav-link"> Rol İzinleri </a></li>
+                                </ul>
+                            </li>*@
+
+                        @*<li class="nav-item nav-item-submenu">
+                                <a href="#" class="nav-link"><i class="icon-store"></i> <span> Kasa </span></a>
+                                <ul class="nav nav-group-sub" data-submenu-title="Kasa">
+                                    <li class="nav-item"><a href="#" class="nav-link"> Kasa Hareketleri </a></li>
+                                    <li class="nav-item"><a href="#" class="nav-link"> Raporlar </a></li>
+                                </ul>
+                            </li>
+
+
+
+                            <li class="nav-item nav-item-submenu">
+                                <a href="#" class="nav-link"><i class="icon-cog"></i> <span>Yapılandırma </span></a>
+                                <ul class="nav nav-group-sub" data-submenu-title="Yapılandırma">
+                                    <li class="nav-item"><a href="#" class="nav-link"> Vergi Ayarları </a></li>
+                                </ul>
+                            </li>*@
+                        <!-- /main -->
+                    </ul>
+                </div>
+                <!-- /main navigation -->
+            </div>
+            <!-- /sidebar content -->
+        </div>
+        <!-- /main sidebar -->
+        <!-- Main content -->
+        <div class="content-wrapper">
+            <!-- Page header -->
+            @*<div class="page-header">
+                      <div class="page-header-content header-elements-md-inline">
+                          <div class="page-title d-flex">
+                              <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">Home</span> - Dashboard</h4>
+                              <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
+                          </div>
+                      </div>
+                </div>*@
+            <!-- /page header -->
+
+            <div class="content">
+                @RenderBody()
+            </div>
+
+            <!-- Footer -->
+            <div class="navbar navbar-expand-lg navbar-light mt-auto">
+                <div class="text-center d-lg-none w-100">
+                    <button type="button" class="navbar-toggler dropdown-toggle" data-toggle="collapse" data-target="#navbar-footer">
+                        <i class="icon-unfold mr-2"></i>
+                    </button>
+                </div>
+                <div class="navbar-collapse collapse" id="navbar-footer">
+                    <span class="navbar-text">
+                        &copy; 2019. <a href="#"> Radevu Sistemi </a>
+                    </span>
+                </div>
+            </div>
+            <!-- /footer -->
+            <script type=text/javascript>
+
+                function getDateFormat(formatString) {
+                    var separator = formatString.match(/[.\/\-\s].*?/);
+                    var parts = formatString.split(/\W+/);
+                    if (!separator || !parts || parts.length === 0) {
+                        throw new Error("Invalid date format.");
+                    }
+                    return { separator: separator, parts: parts };
+                }
+
+                function MyParseDate(value, format) {
+                    var parts = value.split(format.separator);
+
+                    //NEVER use Date(0), this is locale specific!
+                    // * en-GB: 1970-JAN-01
+                    // * pt-BR: 1969-DEC-31
+                    //var date = new Date(0);
+
+                    //An arbitrary date 1970-DEC-15
+                    var date = new Date(1970, 11, 15);
+
+                    var year = -1;
+                    var month = -1;
+                    var day = -1;
+
+                    if (parts.length === format.parts.length) {
+                        for (var i = 0, cnt = format.parts.length; i < cnt; i++) {
+                            var val = parseInt(parts[i], 10) || 1;
+
+                            switch (format.parts[i]) {
+                                case 'dd':
+                                case 'd':
+                                    day = val;
+                                    break;
+                                case 'mm':
+                                case 'm':
+                                    month = val - 1; // month is zero-based
+                                    break;
+                                case 'yyyy':
+                                    year = val;
+                                    break;
+                            }
+                        }
+                    }
+
+                    // must be in this particular order, otherwise 29th of Feb in leap year would not validate
+                    date.setFullYear(year);
+                    date.setMonth(month);
+                    date.setDate(day);
+
+                    console.log("Date validated to " + date.toString());
+
+                    // we can't rely on setDay(), setMonth(), setYear() because if value passed in is greater than allowed, it just ticks over
+                    // to the next month/year. But we can compare if it was ticked over or not.
+                    // If numbers provided are the same as resulting number, then date is fine.
+                    return date.getDate() === day && date.getMonth() === month && date.getFullYear() === year;
+                }
+
+                jQuery.validator.addMethod('date',
+                    function (value, element, params) {
+                        if (this.optional(element)) {
+                            return true;
+                        }
+                        try {
+                            var format = getDateFormat('dd/mm/yyyy');
+                            var result = MyParseDate(value, format);
+                            return result;
+                        } catch (err) {
+                            console.log(err);
+                            return false;
+                        }
+                    });
+            </script>
+        </div>
+        <!-- /main content -->
+    </div>
+    <!-- /page content -->
+</body>
+</html>
